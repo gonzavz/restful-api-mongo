@@ -1,0 +1,39 @@
+{
+  "name": "restful-api-mongo",
+  "version": "1.0.0",
+  "description": "RESTful api for handle Users and Articles.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gonzavz/restful-api-mongo.git"
+  },
+  "keywords": [
+    "restful",
+    "api",
+    "mongodb",
+    "mongoose",
+    "express"
+  ],
+  "author": "Gonzalo Valdez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gonzavz/restful-api-mongo/issues"
+  },
+  "homepage": "https://github.com/gonzavz/restful-api-mongo#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "joi": "^13.1.2",
+    "mongoose": "^5.0.11",
+    "morgan": "^1.9.0",
+    "winston": "^2.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1"
+  }
+}
