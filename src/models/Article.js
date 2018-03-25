@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
+const User = require('./User');
+const CustomValidationError = require('../utils/errors/CustomValidationError');
 const {Schema} = mongoose;
 
 const ArticleSchema = new Schema({
@@ -21,9 +23,24 @@ const ArticleSchema = new Schema({
   },
 });
 
+// Create an index on a searchable field.
 ArticleSchema.index({tags: 1});
 
+// Add paginaiton plugin.
 ArticleSchema.plugin(mongoosePaginate);
+
+// Validate user exist.
+ArticleSchema.pre('save', function(next) {
+  User.findById(this.user)
+    .then((user) => {
+      if (user) {
+        return next();
+      }
+      const errors = {user: 'User does not exist.'};
+      next(new CustomValidationError('User does not exist.', errors));
+    })
+    .catch(next);
+});
 
 Article = mongoose.model('Article', ArticleSchema);
 
