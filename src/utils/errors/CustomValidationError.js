@@ -1,4 +1,3 @@
-
 /** Class representing a CustomValidationError. */
 class CustomValidationError extends Error {
   /**

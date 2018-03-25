@@ -6,6 +6,7 @@ const logger = require('./utils/logger');
 const services = require('./services');
 const mongooseValidationError = require('./midlewares/mongooseValidationError');
 const customValidationError = require('./midlewares/customValidationError');
+const notFoundError = require('./midlewares/notFoundError');
 const app = express();
 
 // Configure body parser
@@ -19,5 +20,5 @@ app.use(services.auth);
 app.use('/users', services.users);
 app.use('/articles', services.articles);
 app.use(errors());
-app.use(mongooseValidationError, customValidationError);
+app.use(notFoundError, mongooseValidationError, customValidationError);
 module.exports = app;
