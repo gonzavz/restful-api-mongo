@@ -2,10 +2,10 @@
   "name": "restful-api-mongo",
   "version": "1.0.0",
   "description": "RESTful api for handle Users and Articles.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "mocha"
+    "start": "node server.js",
+    "test": "PORT=3001 NODE_ENV=testing MONGO_URI=mongodb://db:27017/restful_api_test mocha"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "express": "^4.16.3",
     "joi": "^13.1.2",
     "mongoose": "^5.0.11",
+    "mongoose-paginate": "^5.0.3",
     "morgan": "^1.9.0",
     "winston": "^2.4.1"
   },

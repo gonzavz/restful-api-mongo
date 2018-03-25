@@ -8,6 +8,8 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
+      - MONGO_URI=mongodb://db:27017/restful_api
+      - AUTHORIZATION_TOKEN=5CD4ED173E1C95FE763B753A297D5
     ports:
       - "3000:3000"
     links:
