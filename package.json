@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "PORT=3001 NODE_ENV=testing MONGO_URI=mongodb://db:27017/restful_api_test mocha"
+    "test": "AUTHORIZATION_TOKEN=5CD4ED173E1C95FE763B753A297D5 PORT=3001 NODE_ENV=testing MONGO_URI=mongodb://db:27017/restful_api_test mocha"
   },
   "repository": {
     "type": "git",

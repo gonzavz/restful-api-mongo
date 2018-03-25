@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 
 // Add morgan midleware combined with winston for http request logging.
 app.use(morgan('combined', {stream: logger.stream}));
+app.use('/ping', (req, res) => res.json({message: 'restful api v1.0.0'}));
 app.use(services.auth);
 app.use('/users', services.users);
-app.use('/', (req, res) => res.json({message: 'restful api v1.0.0'}));
 app.use(errors());
 app.use(mongooseValidationError);
 module.exports = app;

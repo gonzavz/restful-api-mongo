@@ -1,7 +1,7 @@
 const authenticate = (req, res, next) => {
   const authorization = req.get('Authorization');
   if (authorization !== process.env.AUTHORIZATION_TOKEN) {
-    return res.sendStatus(401);
+    return res.status(401).json({message: 'Unauthorize'});
   }
   next();
 };

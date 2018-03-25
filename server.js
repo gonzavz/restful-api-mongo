@@ -26,3 +26,5 @@ mongoose.connect(dbUri, options)
     }).on('error', (error) => logger.error(error));
   })
   .catch((error) => logger.error(`Unable to connect to mongoDB due ${error}`));
+
+module.exports = app;
