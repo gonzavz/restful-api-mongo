@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const {Schema} = mongoose;
 
-const Article = new Schema({
+const ArticleSchema = new Schema({
   title: {
     type: String,
     required: [true, 'Article title is required'],
@@ -21,8 +21,10 @@ const Article = new Schema({
   },
 });
 
-Article.index({tags: 1});
+ArticleSchema.index({tags: 1});
 
-Article.plugin(mongoosePaginate);
+ArticleSchema.plugin(mongoosePaginate);
+
+Article = mongoose.model('Article', ArticleSchema);
 
 module.exports = Article;

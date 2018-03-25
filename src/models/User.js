@@ -3,7 +3,7 @@ const urlValidator = require('../utils/validators/urlValidator');
 const {Schema} = mongoose;
 
 
-const User = new Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
     required: [true, 'User name is required'],
@@ -16,6 +16,8 @@ const User = new Schema({
   timestamps: true,
 });
 
-User.index({name: 1});
+UserSchema.index({name: 1});
+
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

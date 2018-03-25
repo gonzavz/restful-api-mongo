@@ -26,6 +26,7 @@
   "homepage": "https://github.com/gonzavz/restful-api-mongo#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "celebrate": "^7.0.4",
     "express": "^4.16.3",
     "joi": "^13.1.2",
     "mongoose": "^5.0.11",
