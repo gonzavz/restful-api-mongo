@@ -1,0 +1,19 @@
+version: "2"
+services:
+  api:
+    container_name: restful_api_server
+    build: .
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    links:
+      - "db"
+  db:
+    container_name: restful_api_database
+    image: mongo:3.6
+    ports:
+      - "20127:20127"
