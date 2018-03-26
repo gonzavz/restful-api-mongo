@@ -9,17 +9,9 @@ const buildOptions = ({limit, offset}) => ({
   populate: ['user'],
 });
 
-const buildQuery = ({tags}) => {
-  const tagsArray = tags.split(',');
-  const query = {};
-  if (tagsArray.legnth > 0) {
-    Object.assign(query, {tags: {$in: tags}});
-  }
-  return query;
-};
-
 const handler = (req, res, next) => {
-    Article.paginate(buildQuery(req.query), buildOptions(req.query))
+    const tags = req.query.tags;
+    Article.paginate({tags}, buildOptions(req.query))
       .then(({docs, total}) => res.json({articles: docs, total}))
       .catch(next);
 };

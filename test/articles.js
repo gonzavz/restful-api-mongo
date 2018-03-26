@@ -1,4 +1,5 @@
 const request = require('supertest');
+const {expect} = require('chai');
 const server = require('../server');
 const User = require('../src/models/User');
 const Article = require('../src/models/Article');
@@ -23,8 +24,8 @@ const tagsNoArrayBody = {
 const articleNoUser = {
   title: 'Somthing about nodeJs',
   text: 'This is a great article about nodeJS',
-  tags: ['nodeJs', 'javascript'],  
-}
+  tags: ['nodeJs', 'javascript'],
+};
 
 const removedUserBody = {
   // Note: for practical reasons we put a valid Random objectId.
@@ -36,6 +37,28 @@ const removedUserBody = {
 
 const validHeaders = {
  'Authorization': process.env.AUTHORIZATION_TOKEN,
+};
+
+const articlesWithNoUser = [
+  {
+    title: 'Somthing about nodeJs',
+    text: 'This is a great article about nodeJS',
+    tags: ['nodeJs', 'javascript'],
+  },
+  {
+    title: 'Somthing about Django',
+    text: 'This is a great article about Django',
+    tags: ['python'],
+  },
+  {
+    title: 'Somthing about awsLambda',
+    text: 'How to use aws lambda with python or nodeJS',
+    tags: ['nodeJs', 'javascript', 'python'],
+  },
+];
+
+const addUserToArticles = (userId, articles) => {
+  return articles.map((article) => Object.assign({}, article, {user: userId}));
 };
 
 describe('Articles Service', () => {
@@ -62,6 +85,30 @@ describe('Articles Service', () => {
       logger.error('Cannot Drop database', error);
       done(error);
     });
+  });
+
+  beforeEach((done) => {
+    logger.info('Dropping Articles');
+    Article.remove({}).exec()
+      .then(() => {
+        logger.info('Articles colection Successfully dropped');
+        User.findOne({name: TestUser.name}).exec()
+          .then((testUser) => {
+            // inster articles
+            Article.insertMany(addUserToArticles(testUser._id, articlesWithNoUser))
+              .then(() => {
+                logger.info('Test Articles Created');
+                done();
+              })
+              .catch((error) => {
+                logger.error('Cannot create Articles', error);
+              });
+          })
+          .catch(done);
+      })
+      .catch((error) => {
+        logger.error('Cant drop Articles Collection', error);
+      });
   });
 
   describe('POST /articles', () => {
@@ -104,6 +151,16 @@ describe('Articles Service', () => {
             .expect(200, done);
         })
         .catch(done);
+    });
+  });
+
+  describe('DELETE /articles/:id', () => {
+    it('Should fail on invalid objectId', (done) => {
+      request(server)
+        .delete('/articles/invalidObjectId')
+        .set(validHeaders)
+        .expect('Content-Type', /json/)
+        .expect(400, done);
     });
   });
 });

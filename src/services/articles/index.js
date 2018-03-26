@@ -25,7 +25,7 @@ router.get('/', celebrate({
   query: {
     limit: Joi.number().default(10),
     offset: Joi.number().default(0),
-    tags: Joi.string().default(''),
+    tags: Joi.any().required().default(false), // tag could be a string or an array
   },
 }), list);
 
