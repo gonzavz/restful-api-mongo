@@ -1,10 +1,12 @@
 const winston = require('winston');
 
+const level = process.env.LOG_LEVEL || 'info';
+
 const logger = new winston.Logger({
   transports: [
     new winston.transports.File({
-      level: 'info',
-      filename: './logs/all-logs.log',
+      level,
+      filename: `./logs/${process.env.NODE_ENV}.log`,
       maxsize: 5242880,
       maxFiles: 3,
     }),
