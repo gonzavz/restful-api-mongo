@@ -21,6 +21,12 @@ router.delete('/:id', celebrate({
   }),
 }), remove);
 
-router.get('/', list);
+router.get('/', celebrate({
+  query: {
+    limit: Joi.number().default(10),
+    offset: Joi.number().default(0),
+    tags: Joi.string().default(''),
+  },
+}), list);
 
 module.exports = router;
