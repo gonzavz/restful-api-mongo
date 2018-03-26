@@ -9,6 +9,7 @@ const mongooseErrorHandler = require('./midlewares/mongooseErrorHandler');
 const customErrorHanlder = require('./midlewares/customValidationErrorHandler');
 const notFoundErrorHanlder = require('./midlewares/notFoundErrorHandler');
 const errorHandler = require('./midlewares/errorHandler');
+const errorLogger = require('./midlewares/errorLogger');
 const app = express();
 
 // Configure body parser
@@ -28,6 +29,9 @@ app.use('/articles', services.articles);
 
 // If not found throw a custom NotFoundError
 app.use((req, res, next) => next(new NotFoundError()));
+
+// Log Errors
+app.use(errorLogger);
 
 // Add celebrate error handler
 app.use(errors());
