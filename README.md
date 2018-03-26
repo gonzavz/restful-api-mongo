@@ -13,14 +13,20 @@ RESTful API for manage Users and Articles.
 
 ## Setup
 
-Clone repo
-
 ```bash
 $ git clone git@github.com:gonzavz/restful-api-mongo.git
 $ cd restful-api-mongo
 $ docker-compose build
 $ docker-compose up
 ```
+
+## env
+- AUTHORIZATION_TOKEN: set the allowed access token.
+- MONGO_URI: Mongo database connection uri.
+- NODE_ENV: Application environment [production, development, testing]
+- LOG_LEVEL: Applicacion Loggin level.[info, warning, error, debug]
+
+Note: you can change this on docker-compose.yml but not commit the changes.
 
 ## Dockers
 The proyect has a local infrastructure setted up using docker-compose.
