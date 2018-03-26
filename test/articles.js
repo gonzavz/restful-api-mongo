@@ -1,5 +1,4 @@
 const request = require('supertest');
-const {expect} = require('chai');
 const server = require('../server');
 const User = require('../src/models/User');
 const Article = require('../src/models/Article');
@@ -95,7 +94,8 @@ describe('Articles Service', () => {
         User.findOne({name: TestUser.name}).exec()
           .then((testUser) => {
             // inster articles
-            Article.insertMany(addUserToArticles(testUser._id, articlesWithNoUser))
+            Article.insertMany(
+              addUserToArticles(testUser._id, articlesWithNoUser))
               .then(() => {
                 logger.info('Test Articles Created');
                 done();
