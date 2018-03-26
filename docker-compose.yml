@@ -16,6 +16,7 @@ services:
       - ./logs:/usr/src/app/logs
       - ./src:/usr/src/app/src
       - ./server.js:/usr/src/app/server.js
+      - ./test:/usr/src/app/test
   db:
     container_name: restful_api_database
     image: mongo:3.6

@@ -271,3 +271,11 @@ curl -X GET \
 We include a postman collection for practical reasons. You are welcome to use it.
 
 **restful_api.postman_collection.json**
+
+## LOGS
+The application use morgan combined with winston, all logs are written to a file under **/logs** folder.
+
+The name convention for log files is:
+```javascript
+`${process.env.NODE_ENV}.log`
+```
