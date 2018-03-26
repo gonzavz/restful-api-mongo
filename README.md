@@ -265,3 +265,9 @@ curl -X GET \
   'http://localhost:3000/articles/?tags=nodeJs' \
   -H 'Authorization: [AUTHORIZATION_TOKEN]'
 ```
+
+## POSTMAN
+
+We include a postman collection for practical reasons. You are welcome to use it.
+
+**restful_api.postman_collection.json**
