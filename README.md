@@ -21,7 +21,7 @@ $ docker-compose up
 ```
 
 ## env
-- AUTHORIZATION_TOKEN: set the allowed access token.
+- AUTHORIZATION_TOKEN: set the allowed access token.(default:5CD4ED173E1C95FE763B753A297D5)
 - MONGO_URI: Mongo database connection uri.
 - NODE_ENV: Application environment [production, development, testing]
 - LOG_LEVEL: Applicacion Loggin level.[info, warning, error, debug]
