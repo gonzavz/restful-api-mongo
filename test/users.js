@@ -29,14 +29,14 @@ const invalidBodyNoName = {
 logger.info(validHeaders);
 describe('User Service', () => {
   beforeEach((done) => {
-    logger.info('Droping database data.');
+    logger.info('Droping database.');
     User.remove({}).exec()
       .then(() => {
-        logger.info('users collection succesfully droped');
+        logger.info('Users collection succesfully droped');
         done();
       })
       .catch((error) => {
-        logger.error(`error during users collection drop process: ${error}`);
+        logger.error('Cant Drop users collection', error);
         done(error);
       });
   });
