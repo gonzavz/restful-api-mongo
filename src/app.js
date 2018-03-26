@@ -16,8 +16,26 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// Add morgan midleware combined with winston for http request logging.
-app.use(morgan('tiny', {stream: logger.stream}));
+// Add morgan midleware combined with winston for http errors request logging.
+app.use(morgan('tiny', {
+  stream: {
+    write: function(message, encoding) {
+      logger.error(message);
+    },
+  },
+  skip: function (req, res) { return res.statusCode < 400 }
+}));
+
+// Add morgan midleware for dev loggin.
+app.use(morgan('tiny', {
+  stream: {
+    write: function(message, encoding) {
+      logger.info(message);
+    },
+  },
+  skip: function (req, res) { return res.statusCode > 400 }
+}));
+
 
 // Add healthcheck endpoint.
 app.get('/ping', (req, res) => res.json({message: 'restful api v1.0.0'}));
